@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # FastAPI Application
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: career_intel_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=True
+      - AWS_RDS_POSTGRES_URL=postgresql+asyncpg://postgres:postgres_secure_pass@postgres_rds_local:5432/career_intelligence_db
+      - AZURE_COSMOS_ENDPOINT=${AZURE_COSMOS_ENDPOINT:-https://career-intel-cosmos.documents.azure.com:443/}
+      - AZURE_COSMOS_KEY=${AZURE_COSMOS_KEY:-}
+      - FIREBASE_CREDENTIALS_PATH=${FIREBASE_CREDENTIALS_PATH:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    depends_on:
+      postgres_rds_local:
+        condition: service_healthy
+    volumes:
+      - .:/app/backend
+
+  # Local PostgreSQL container simulating AWS RDS
+  postgres_rds_local:
+    image: postgres:16-alpine
+    container_name: career_intel_postgres_mock
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres_secure_pass
+      - POSTGRES_DB=career_intelligence_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d career_intelligence_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

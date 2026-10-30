@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #FFFBF9;
+    color: #14080E;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Warm ambient glowing radial background accents */
+.bg-warm-canvas {
+  background-color: #FFFBF9;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(255, 233, 229, 0.6) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(255, 230, 222, 0.4) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(255, 243, 240, 0.8) 0px, transparent 60%);
+}
+
+.nixtio-gradient-btn {
+  background: linear-gradient(135deg, #470D92 0%, #5A1844 50%, #B62C22 100%);
+  color: #ffffff;
+  transition: all 0.25s ease-in-out;
+}
+
+.nixtio-gradient-btn:hover {
+  opacity: 0.94;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px -5px rgba(71, 13, 146, 0.25), 0 8px 10px -6px rgba(182, 44, 34, 0.2);
+}
+
+.nixtio-gradient-text {
+  background: linear-gradient(135deg, #470D92 0%, #5A1844 60%, #B62C22 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

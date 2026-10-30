@@ -1,0 +1,40 @@
+# ==============================================================================
+# Production Dependencies for AI Career Intelligence Platform
+# ==============================================================================
+
+# FastAPI & ASGI Server
+fastapi>=0.115.0,<1.0.0
+uvicorn[standard]>=0.31.0,<1.0.0
+pydantic>=2.9.0,<3.0.0
+pydantic-settings>=2.5.0,<3.0.0
+email-validator>=2.2.0
+python-multipart>=0.0.12
+
+# Relational Database: AWS RDS PostgreSQL + Async Engine
+sqlalchemy[asyncio]>=2.0.35,<3.0.0
+greenlet>=3.1.0
+asyncpg>=0.29.0
+alembic>=1.13.3
+aiosqlite>=0.20.0  # Used for local dev zero-config fallback
+
+# Distributed NoSQL: Azure Cosmos DB (SQL/Core API)
+azure-cosmos>=4.8.0
+
+# Real-Time Event Dispatch: Google Firebase Admin SDK
+firebase-admin>=6.5.0
+
+# AI Layer: Google Gemini SDK
+google-genai>=0.2.0
+
+# Security & Authentication
+pyjwt[crypto]>=2.9.0
+passlib[bcrypt]>=1.7.4
+bcrypt>=4.2.0
+
+# Text Extraction from Resumes
+pypdf>=5.0.1
+pdfplumber>=0.11.4
+
+# Utilities & Async HTTP
+httpx>=0.27.2
+python-dotenv>=1.0.1
